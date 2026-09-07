@@ -1,0 +1,7 @@
+# Kept out of the published site.
+.git/**
+.wrangler/**
+node_modules/**
+.assetsignore
+wrangler.toml
+README.md

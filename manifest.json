@@ -1,0 +1,19 @@
+{
+  "name": "ZeroUpload — Free In-Browser PDF Tools",
+  "short_name": "ZeroUpload",
+  "description": "Merge, split, compress, sign, and convert PDF files for free, 100% in your browser. No uploads, no account.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#f8fafc",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

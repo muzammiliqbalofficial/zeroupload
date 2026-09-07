@@ -1,0 +1,36 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Content-Type-Options: nosniff
+
+# Static assets don't change on their own; a deploy is what changes them.
+# Filenames aren't content-hashed, so this is a moderate cache lifetime rather
+# than a long "immutable" one -- a returning visitor's own browser can hold an
+# old copy for up to this long after a deploy, independent of anything the
+# server does. If a shipped fix isn't showing up for someone, this is why.
+/css/*
+  Cache-Control: public, max-age=86400
+
+/js/*
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+/apple-touch-icon.svg
+  Cache-Control: public, max-age=604800
+
+/og-image.png
+  Cache-Control: public, max-age=604800
+
+/og-image.svg
+  Cache-Control: public, max-age=604800
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+
+# This exact file only changes if the font itself is intentionally swapped
+# out, so it can be cached far longer than the other assets.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
