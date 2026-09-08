@@ -1,14 +1,10 @@
 # ZeroUpload — Fast, Free, Private PDF Tools
 
-A fully **client-side** PDF toolkit — merge, split, compress, rotate, remove
-pages, protect, unlock and convert PDFs. Because **everything runs in the
-browser**, it's faster and cheaper than cloud tools (iLovePDF etc.), needs no
-server, and users' files never get uploaded.
-
-## Brand & domain
-- Brand: **ZeroUpload**
-- Domain: `https://zeroupload.co`
-- Support: `support@zeroupload.co`
+A fully **client-side** PDF toolkit at [zeroupload.co](https://zeroupload.co) —
+merge, split, compress, rotate, remove pages, protect, unlock and convert PDFs.
+Every operation runs in the browser: files are never uploaded, there is no
+server round trip, and the tools keep working offline once the service worker
+has cached them.
 
 ## Tools included
 | Tool | What it does |
@@ -41,7 +37,9 @@ server, and users' files never get uploaded.
 ├─ js/common.js          → helpers, dropzone, toast, dark mode, SW, SEO, ads
 ├─ js/<tool>.js          → one logic file per tool
 ├─ tools/<tool>.html     → one page per tool
+├─ guides/<topic>.html   → long-form how-to guides (SEO landing pages)
 ├─ favicon.svg, apple-touch-icon.svg, og-image.svg → brand assets
+├─ manifest.json         → PWA manifest
 ├─ sw.js                 → service worker (offline)
 ├─ robots.txt, sitemap.xml → SEO files
 ├─ _headers              → security headers
@@ -50,6 +48,18 @@ server, and users' files never get uploaded.
 
 Libraries are loaded from CDNs (pdf-lib, pdf.js, JSZip, docx, mammoth,
 html2canvas, jsPDF). No build step required. Everything is 100% client-side.
+
+## Local development
+
+There is nothing to install and no build step. Serve the folder over HTTP so
+the service worker registers and the tool pages resolve correctly:
+
+```bash
+npx serve .
+```
+
+Opening `index.html` from the filesystem directly will not work — the service
+worker and several tools need an HTTP origin.
 
 ## How it all works
 - **Dark mode** — sun/moon toggle in the topbar, saved to `localStorage`,
@@ -60,13 +70,11 @@ html2canvas, jsPDF). No build step required. Everything is 100% client-side.
   `sitemap.xml` reference the real domain.
 
 ## Deploying updates
-Upload the whole folder (including `js/`, `css/`, `tools/`, `sw.js`,
-`robots.txt`, `sitemap.xml`, and every `*.svg`) to your static hosting
-(Cloudflare Workers / Pages). Everything works without a backend.
+Upload the whole folder (including `js/`, `css/`, `tools/`, `guides/`, `sw.js`,
+`manifest.json`, `robots.txt`, `sitemap.xml`, and every `*.svg`) to your static
+hosting (Cloudflare Workers / Pages). Everything works without a backend.
 
 ## Notes
 - Bump `CACHE_NAME` in `sw.js` whenever you deploy a version so returning users
   get the new assets instead of the old cached ones.
 - Only unlock PDFs you own or have permission to modify.
-- Replace the placeholder `support@zeroupload.co` if you change your support
-  address.
