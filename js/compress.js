@@ -9,9 +9,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 var LEVELS = {
-  low:    { scale: 2.0, quality: 0.85 },
+  low: { scale: 2.0, quality: 0.85 },
   medium: { scale: 1.5, quality: 0.65 },
-  high:   { scale: 1.0, quality: 0.45 },
+  high: { scale: 1.0, quality: 0.45 },
 };
 
 document.getElementById("dlBtn").addEventListener("click", function () {

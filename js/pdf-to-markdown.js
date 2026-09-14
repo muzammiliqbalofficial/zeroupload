@@ -74,8 +74,8 @@
             pageMdLines.push('\n## ' + lineText + '\n');
           } else if (avgSize >= 13) {
             pageMdLines.push('\n### ' + lineText + '\n');
-          } else if (/^[-*•●▪‣]/.test(lineText)) {
-            pageMdLines.push('- ' + lineText.replace(/^[-*•●▪‣]\s*/, ''));
+          } else if (/^[-*•●‣]/.test(lineText)) {
+            pageMdLines.push('- ' + lineText.replace(/^[-*•●‣]\s*/, ''));
           } else {
             pageMdLines.push(lineText);
           }
@@ -96,7 +96,7 @@
       dropzone.classList.add('hide');
       mdStudio.classList.remove('hide');
 
-      mdMetaLabel.textContent = numPages + ' Pages � ' + extractedMd.split(/\s+/).length + ' words';
+      mdMetaLabel.textContent = numPages + ' Pages ' + extractedMd.split(/\s+/).length + ' words';
       mdRawOutput.textContent = extractedMd;
 
       // Simple formatted HTML preview

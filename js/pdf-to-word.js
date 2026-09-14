@@ -2,12 +2,12 @@
  * PDF to Word — High-Fidelity Conversion Engine
  *
  * Extracts real text with full formatting:
- *   1. Font Styles: Detects Bold, Italic, Font Sizes, and Font Families.
- *   2. Text Alignment: Detects Center, Right, and Left alignment per line.
- *   3. Smart Paragraph Consolidation: Groups contiguous lines into natural flowing
- *      paragraphs (eliminating double spacing and broken line breaks).
- *   4. Accurate Word Spacing: Prevents squished or double-spaced words.
- *   5. Image & Graphics Preservation: Preserves visual elements, logos, and scanned pages.
+ * 1. Font Styles: Detects Bold, Italic, Font Sizes, and Font Families.
+ * 2. Text Alignment: Detects Center, Right, and Left alignment per line.
+ * 3. Smart Paragraph Consolidation: Groups contiguous lines into natural flowing
+ * paragraphs (eliminating double spacing and broken line breaks).
+ * 4. Accurate Word Spacing: Prevents squished or double-spaced words.
+ * 5. Image & Graphics Preservation: Preserves visual elements, logos, and scanned pages.
  * ========================================================================== */
 
 var p2wState = { out: null };

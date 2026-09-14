@@ -1,6 +1,6 @@
-# ZeroUpload — Fast, Free, Private PDF Tools
+# ZeroUpload - Fast, Free, Private PDF Tools
 
-A fully **client-side** PDF toolkit at [zeroupload.co](https://zeroupload.co) —
+A fully **client-side** PDF toolkit at [zeroupload.co](https://zeroupload.co) -
 merge, split, compress, rotate, remove pages, protect, unlock and convert PDFs.
 Every operation runs in the browser: files are never uploaded, there is no
 server round trip, and the tools keep working offline once the service worker
@@ -28,21 +28,21 @@ has cached them.
 ## Project structure
 ```
 .
-├─ index.html            → landing page (tool grid, hero, SEO meta)
-├─ about.html            → About page
-├─ privacy.html          → Privacy Policy
-├─ terms.html            → Terms of Service
-├─ contact.html          → Contact page
-├─ css/style.css         → all shared styles (incl. dark mode)
-├─ js/common.js          → helpers, dropzone, toast, dark mode, SW, SEO, ads
-├─ js/<tool>.js          → one logic file per tool
-├─ tools/<tool>.html     → one page per tool
-├─ guides/<topic>.html   → long-form how-to guides (SEO landing pages)
+├─ index.html → landing page (tool grid, hero, SEO meta)
+├─ about.html → About page
+├─ privacy.html → Privacy Policy
+├─ terms.html → Terms of Service
+├─ contact.html → Contact page
+├─ css/style.css → all shared styles (incl. dark mode)
+├─ js/common.js → helpers, dropzone, toast, dark mode, SW, SEO, ads
+├─ js/<tool>.js → one logic file per tool
+├─ tools/<tool>.html → one page per tool
+├─ guides/<topic>.html → long-form how-to guides (SEO landing pages)
 ├─ favicon.svg, apple-touch-icon.svg, og-image.svg → brand assets
-├─ manifest.json         → PWA manifest
-├─ sw.js                 → service worker (offline)
+├─ manifest.json → PWA manifest
+├─ sw.js → service worker (offline)
 ├─ robots.txt, sitemap.xml → SEO files
-├─ _headers              → security headers
+├─ _headers → security headers
 └─ README.md
 ```
 
@@ -58,15 +58,15 @@ the service worker registers and the tool pages resolve correctly:
 npx serve .
 ```
 
-Opening `index.html` from the filesystem directly will not work — the service
+Opening `index.html` from the filesystem directly will not work - the service
 worker and several tools need an HTTP origin.
 
 ## How it all works
-- **Dark mode** — sun/moon toggle in the topbar, saved to `localStorage`,
+- **Dark mode** - sun/moon toggle in the topbar, saved to `localStorage`,
   respects the OS preference on first visit.
-- **Offline support** — Auto-registered service worker (`/sw.js`).
-- **Mobile** — hamburger menu below 640px, touch-friendly.
-- **SEO** — each page has canonical/og/twitter meta; `robots.txt` +
+- **Offline support** - Auto-registered service worker (`/sw.js`).
+- **Mobile** - hamburger menu below 640px, touch-friendly.
+- **SEO** - each page has canonical/og/twitter meta; `robots.txt` +
   `sitemap.xml` reference the real domain.
 
 ## Deploying updates

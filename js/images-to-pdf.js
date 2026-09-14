@@ -16,9 +16,9 @@ document.getElementById("dlBtn").addEventListener("click", function () {
 document.getElementById("runBtn").addEventListener("click", imagesToPdf);
 
 const PDF_SIZES = {
-  a4:    { w: 595.28, h: 841.89 },
-  letter:{ w: 612.0,  h: 792.0 },
-  auto:  null,
+  a4: { w: 595.28, h: 841.89 },
+  letter:{ w: 612.0, h: 792.0 },
+  auto: null,
 };
 
 async function imagesToPdf() {
