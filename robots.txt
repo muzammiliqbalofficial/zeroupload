@@ -59,6 +59,13 @@ Disallow: /
 
 # END Cloudflare Managed Content
 
+User-agent: Google-adstxt
+Allow: /ads.txt
+
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: *
 Allow: /
+Allow: /ads.txt
 Sitemap: https://zeroupload.co/sitemap.xml

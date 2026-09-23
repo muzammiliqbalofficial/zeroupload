@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script async defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8645479142211810" crossorigin="anonymous"></script>
-<title>About ZeroUpload — 100% Private In-Browser PDF Suite</title>
-<meta name="description" content="Learn about ZeroUpload, the free in-browser PDF suite built on WebAssembly with zero server uploads and 100% client-side privacy.">
+<title>About ZeroUpload — Architecture, Privacy Philosophy &amp; Mission</title>
+<meta name="description" content="Discover ZeroUpload's mission and engineering: 100% client-side WebAssembly architecture, browser memory sandboxing, open-source stack, and zero server uploads.">
 <meta name="theme-color" content="#f8fafc">
 <link rel="canonical" href="https://zeroupload.co/about">
 <link rel="alternate" hreflang="x-default" href="https://zeroupload.co/about">
@@ -15,8 +15,8 @@
 <link rel="alternate" hreflang="en-AU" href="https://zeroupload.co/about">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZeroUpload">
-<meta property="og:title" content="About ZeroUpload — 100% Private In-Browser PDF Suite">
-<meta property="og:description" content="Learn about ZeroUpload, the free in-browser PDF suite built on WebAssembly with zero server uploads and 100% client-side privacy.">
+<meta property="og:title" content="About ZeroUpload — Architecture, Privacy Philosophy &amp; Mission">
+<meta property="og:description" content="Discover ZeroUpload's mission and engineering: 100% client-side WebAssembly architecture, browser memory sandboxing, open-source stack, and zero server uploads.">
 <meta property="og:url" content="https://zeroupload.co/about">
 <meta property="og:image" content="https://zeroupload.co/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,16 +33,43 @@ try {
 } catch (e) {}
 </script>
 <link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About ZeroUpload",
+  "url": "https://zeroupload.co/about",
+  "description": "ZeroUpload is an open, private in-browser PDF manipulation suite engineered with client-side WebAssembly and modern web cryptography.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "ZeroUpload",
+    "url": "https://zeroupload.co/",
+    "logo": "https://zeroupload.co/og-image.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "support@zeroupload.co",
+      "contactType": "customer service"
+    }
+  }
+}
+</script>
 <style>
-.about-panel { max-width: 820px; margin: 40px auto; }
-.about-panel h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
-.about-panel h2 { font-size: 1.35rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
-.about-panel .sub { color: var(--muted); margin-bottom: 24px; font-size: 1.05rem; }
-.about-panel p.body-text { color: var(--muted); line-height: 1.7; margin-bottom: 16px; font-size: 0.96rem; }
-.about-panel ul { color: var(--muted); margin: 12px 0 20px 24px; font-size: 0.95rem; }
-.about-panel li { margin-bottom: 8px; line-height: 1.6; }
+.about-panel { max-width: 860px; margin: 40px auto; padding: 36px 32px; }
+.about-panel h1 { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+.about-panel h2 { font-size: 1.4rem; font-weight: 700; margin: 36px 0 14px; color: var(--text); }
+.about-panel h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+.about-panel .sub { color: var(--muted); margin-bottom: 24px; font-size: 1.08rem; line-height: 1.6; }
+.about-panel p.body-text { color: var(--muted); line-height: 1.75; margin-bottom: 18px; font-size: 0.98rem; }
+.about-panel ul { color: var(--muted); margin: 12px 0 24px 24px; font-size: 0.96rem; }
+.about-panel li { margin-bottom: 10px; line-height: 1.65; }
 .about-panel li strong { color: var(--text); }
-.about-panel .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+.about-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.94rem; border-radius: 8px; overflow: hidden; }
+.about-table th, .about-table td { padding: 12px 16px; border: 1px solid var(--border); text-align: left; }
+.about-table th { background: var(--hover); color: var(--text); font-weight: 600; }
+.about-table td { color: var(--muted); }
+.about-panel .actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+.callout { background: var(--hover); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 6px; margin: 24px 0; }
+.callout p { margin: 0; color: var(--text); line-height: 1.6; font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -54,9 +81,10 @@ try {
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="/#tools">Tools</a>
-      <a href="/#guides">Guides</a>
-      <a href="/about.html">About</a>
-      <a href="/#privacy">Privacy</a>
+      <a href="/guides/">Guides</a>
+      <a href="/#how">How it works</a>
+      <a href="/about.html" class="active">About</a>
+      <a href="/contact.html">Contact</a>
     </nav>
     <div class="topbar-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -73,35 +101,110 @@ try {
   <div class="breadcrumb"><a href="/">Home</a> / <b>About</b></div>
   <div class="panel about-panel">
     <h1>About ZeroUpload</h1>
-    <p class="sub">Free, private in-browser PDF utilities engineered with client-side WebAssembly.</p>
+    <p class="sub">Free, private in-browser PDF utilities engineered with client-side WebAssembly and zero server uploads.</p>
 
-    <p class="body-text">ZeroUpload is a privacy-first suite of fifteen PDF tools: Sign PDF, Organize Pages, Page Numbers &amp; Watermark, PDF to Markdown for AI, Merge, Split, Compress, PDF to Word, Word to PDF, PDF to Images, Images to PDF, Rotate, Remove Pages, Protect, and Unlock. They are 100% free, require no account registration, enforce no daily file quotas, and are built around one foundational principle: <strong>Your documents never leave your device.</strong></p>
+    <div class="callout">
+      <p><strong>Foundational Guarantee:</strong> Your documents never touch a remote server. Every PDF operation (merging, compressing, signing, converting) executes directly in your browser's local sandbox memory.</p>
+    </div>
 
-    <h2>The Architectural Principle: Everything Runs In Your Browser</h2>
-    <p class="body-text">Almost every online PDF website operates by uploading your sensitive documents to a remote cloud server, executing the transformation there, and transmitting a file back to you. That architecture exposes legal contracts, medical charts, tax records, and employee information to remote databases, unauthorized internal access, and potential cloud data breaches.</p>
-    <p class="body-text">ZeroUpload takes the client-first approach instead. Every transformation runs exclusively in your browser using WebAssembly and modern JavaScript. There is zero upload step, zero network roundtrip, and zero document caching. Once a tool has finished loading, you can disconnect your Wi-Fi or mobile data completely and it keeps working, since nothing it does from that point on needs a network connection. Loading a different tool, or reloading the page, does need one again.</p>
+    <h2>Our Mission: Restoring Privacy to Document Editing</h2>
+    <p class="body-text">
+      For years, internet users needing to merge two PDF files, compress a document for an email attachment, or sign a contract have been forced into an unsafe compromise. Conventional online PDF editors require users to upload confidential documents—including bank statements, medical records, legal agreements, and corporate tax returns—to remote third-party cloud servers.
+    </p>
+    <p class="body-text">
+      Once uploaded to a remote server, users have no visibility into how long copies are stored, which internal operators have access, or whether that cloud storage is vulnerable to security breaches. Furthermore, traditional services monetize users through aggressive paywalls, restrictive daily file limits, and mandatory registration.
+    </p>
+    <p class="body-text">
+      ZeroUpload was founded to prove that modern web browsers are fully capable of executing complex document manipulation locally. By harnessing WebAssembly (Wasm) and native JavaScript APIs, ZeroUpload provides a 100% private, unrestricted, and high-performance suite of fifteen PDF utilities without requiring sign-ups, subscriptions, or remote uploads.
+    </p>
 
-    <h2>Open-Source Technical Foundations</h2>
-    <p class="body-text">ZeroUpload is built on established open-source document libraries:</p>
+    <h2>Architectural Principle: The Client-Side Sandbox</h2>
+    <p class="body-text">
+      The core engineering breakthrough of ZeroUpload is its client-side architecture. When you drag and drop a PDF into any of our tools:
+    </p>
     <ul>
-      <li><strong>pdf-lib:</strong> Low-level PDF object stream manipulation.</li>
-      <li><strong>pdf.js:</strong> Mozilla's PDF rendering and text extraction engine.</li>
-      <li><strong>mammoth &amp; docx:</strong> Document parsing for Microsoft Word interoperability.</li>
-      <li><strong>WebAssembly (Wasm):</strong> Compiled modules for client-side compression and processing.</li>
+      <li><strong>Local Memory Ingestion:</strong> The file is read via the browser's <code>FileReader</code> API into an isolated <code>ArrayBuffer</code> residing purely in your computer's random-access memory (RAM).</li>
+      <li><strong>WebAssembly Execution:</strong> High-performance compiled binary routines parse the PDF object streams, compress image XObjects, or assemble new cross-reference tables directly within the browser runtime.</li>
+      <li><strong>Direct Blob Generation:</strong> The modified document is compiled into a local <code>Blob</code> and downloaded directly to your file system through a synthetic link.</li>
+      <li><strong>Immediate Memory Purge:</strong> When you navigate away from the page or close your tab, the document buffer is automatically dereferenced and reclaimed by the browser's garbage collector. Zero traces remain.</li>
     </ul>
 
-    <h2>Privacy By Design</h2>
-    <p class="body-text">Because ZeroUpload does not collect, transmit, or store your file content on any server, there's no upload for a breach, subpoena, or third party to reach — the document simply never leaves your device. That said, ZeroUpload is a tool, not a compliance program: whether your own use of it satisfies a specific framework like GDPR, CCPA, or HIPAA depends on your organization's broader practices, not on this site alone. If you operate under one of those frameworks, check with whoever handles your compliance before relying on any single tool.</p>
+    <h2>ZeroUpload vs Traditional Cloud PDF Platforms</h2>
+    <div style="overflow-x:auto;">
+      <table class="about-table">
+        <thead>
+          <tr>
+            <th>Security &amp; Functional Attribute</th>
+            <th>ZeroUpload</th>
+            <th>Conventional Online PDF Portals</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>File Upload to Cloud</strong></td>
+            <td><strong>Never (0 bytes transmitted)</strong></td>
+            <td>Required for every action</td>
+          </tr>
+          <tr>
+            <td><strong>Server-Side Storage Risk</strong></td>
+            <td><strong>None (Zero-knowledge)</strong></td>
+            <td>High (Stored in cloud databases)</td>
+          </tr>
+          <tr>
+            <td><strong>Offline Usability</strong></td>
+            <td><strong>Works completely offline</strong></td>
+            <td>Fails without internet connection</td>
+          </tr>
+          <tr>
+            <td><strong>File Limits &amp; Quotas</strong></td>
+            <td><strong>Uncapped &amp; Unlimited</strong></td>
+            <td>2-3 files per day, paywall above limits</td>
+          </tr>
+          <tr>
+            <td><strong>Account Registration</strong></td>
+            <td><strong>Not required (No sign-up)</strong></td>
+            <td>Often mandatory for downloads</td>
+          </tr>
+          <tr>
+            <td><strong>Processing Latency</strong></td>
+            <td><strong>Instant (No network latency)</strong></td>
+            <td>Slow (Upload + Queue + Download)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h2>Educational Resources &amp; Guides</h2>
-    <p class="body-text">In addition to the tool suite, ZeroUpload publishes tutorials on digital signatures, document compression, and AI prompt engineering in the <a href="/#guides">PDF Knowledge Base</a>.</p>
+    <h2>Open-Source Technical Foundations</h2>
+    <p class="body-text">ZeroUpload is engineered on robust, battle-tested open-source document specifications and standards:</p>
+    <ul>
+      <li><strong>pdf-lib:</strong> Low-level PDF object tree manipulation, page indexing, stream dictionary modifications, and document signing.</li>
+      <li><strong>Mozilla pdf.js:</strong> Industrial-strength PDF rasterization, text layer extraction, and font parsing engine.</li>
+      <li><strong>mammoth.js &amp; docx:</strong> Document parsing and XML compilation for clean Microsoft Word (.docx) interoperability.</li>
+      <li><strong>WebAssembly (Wasm):</strong> Compiled C and Rust routines executing near native speed for image downsampling, deflate/inflate compression, and cryptographic hash verification.</li>
+    </ul>
 
-    <h2>Contact &amp; Support</h2>
-    <p class="body-text">ZeroUpload is an independent project focused on privacy-preserving web software. For feature suggestions, bug reports, or technical support, reach out at <a href="mailto:support@zeroupload.co">support@zeroupload.co</a> or visit the <a href="/contact.html">contact page</a>.</p>
+    <h2>Device Performance &amp; Memory Guidelines</h2>
+    <p class="body-text">
+      Because processing takes place locally on your hardware, performance scales with your device's available memory (RAM) and CPU power:
+    </p>
+    <ul>
+      <li><strong>Standard Documents (1 to 200 pages):</strong> Operations like merging, splitting, signing, and reordering execute almost instantly (typically under 2 seconds).</li>
+      <li><strong>Large Documents (200+ pages or 50MB+):</strong> Complex operations like full PDF-to-Word extraction or high-compression image rendering require sufficient available browser RAM. We recommend closing unnecessary browser tabs when processing massive 500+ page archives.</li>
+    </ul>
+
+    <h2>Educational Commitment &amp; Knowledge Base</h2>
+    <p class="body-text">
+      In addition to providing free utilities, ZeroUpload is committed to educating professionals, developers, and everyday users on digital document security, cryptographic signatures, token optimization for AI workflows, and privacy hygiene. Explore our articles in the <a href="/guides/">PDF Knowledge Base</a>.
+    </p>
+
+    <h2>Support &amp; Feedback</h2>
+    <p class="body-text">
+      ZeroUpload is developed and maintained independently. If you encounter a bug, have a feature suggestion, or need technical clarification, please contact our support team at <a href="mailto:support@zeroupload.co">support@zeroupload.co</a> or submit an inquiry through our <a href="/contact.html">Contact Support Form</a>.
+    </p>
 
     <div class="actions">
-      <a class="btn btn-primary" href="/#tools">Explore All 15 Tools →</a>
-      <a class="btn btn-outline" href="/#guides">Browse PDF Guides</a>
+      <a class="btn btn-primary" href="/#tools">Explore All 15 Tools</a>
+      <a class="btn btn-outline" href="/guides/">Browse PDF Guides</a>
     </div>
   </div>
 </main>
@@ -110,10 +213,10 @@ try {
     <div>
       <div class="f-title">ZeroUpload</div>
       <a href="/index.html">Home</a>
-      <a href="/about.html">About</a>
+      <a href="/about.html">About Us</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms of Service</a>
-      <a href="/contact.html">Contact</a>
+      <a href="/contact.html">Contact &amp; Support</a>
     </div>
     <div>
       <div class="f-title">Popular Tools</div>
@@ -122,17 +225,26 @@ try {
       <a href="/tools/merge.html">Merge PDF</a>
       <a href="/tools/compress.html">Compress PDF</a>
       <a href="/tools/pdf-to-word.html">PDF to Word</a>
+      <a href="/tools/page-numbers.html">Page Numbers</a>
     </div>
     <div>
       <div class="f-title">Educational Guides</div>
+      <a href="/guides/">All Guides Hub</a>
       <a href="/guides/how-to-sign-pdf-electronically.html">How to Sign a PDF</a>
       <a href="/guides/how-to-combine-pdf-files.html">How to Combine PDFs</a>
       <a href="/guides/how-to-compress-pdf-without-losing-quality.html">Compress PDF Without Quality Loss</a>
       <a href="/guides/convert-pdf-to-markdown-for-chatgpt-ai.html">PDF to Markdown for AI</a>
       <a href="/guides/client-side-pdf-security-guide.html">In-Browser PDF Security</a>
     </div>
+    <div>
+      <div class="f-title">Security &amp; Privacy</div>
+      <a href="/privacy.html#gdpr">GDPR Compliance</a>
+      <a href="/privacy.html#retention">0-Day Data Retention</a>
+      <a href="/terms.html#dmca">DMCA Policy</a>
+      <a href="/contact.html">Support Desk</a>
+    </div>
   </div>
-  <div class="legal">Copyright <span id="year"></span> ZeroUpload. All tools run 100% in your browser. No data is ever uploaded.</div>
+  <div class="legal">&copy; <span id="year"></span> ZeroUpload. All tools run 100% in your browser. No files are ever uploaded to any server.</div>
 </footer>
 <div id="toast"></div>
 <script>document.getElementById("year").textContent=new Date().getFullYear();</script>

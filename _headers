@@ -34,3 +34,8 @@
 # out, so it can be cached far longer than the other assets.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+/ads.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
