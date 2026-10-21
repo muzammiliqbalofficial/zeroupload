@@ -34,18 +34,20 @@ async function convertWordToPdf() {
     var holder = document.getElementById("w2p-holder") || document.createElement("div");
     holder.id = "w2p-holder";
     holder.style.cssText = "position:absolute;left:-10000px;top:0;width:794px;background:#fff;padding:48px;";
-    holder.innerHTML = '<style>' +
-      'body{font-family:"Segoe UI",Calibri,Arial,sans-serif;color:#111;line-height:1.55;font-size:14px;background:#fff}' +
-      'h1{font-size:24px;font-weight:700;margin:16px 0 8px;color:#0f172a}' +
-      'h2{font-size:18px;font-weight:600;margin:14px 0 6px;color:#1e293b}' +
-      'h3{font-size:16px;font-weight:600;margin:12px 0 4px}' +
-      'p{margin:0 0 10px 0}' +
-      'ul,ol{margin:0 0 10px 24px}' +
-      'li{margin-bottom:4px}' +
-      'img{max-width:100%;height:auto}' +
-      'table{border-collapse:collapse;width:100%;margin:12px 0}' +
-      'td,th{border:1px solid #cbd5e1;padding:6px 10px;text-align:left}' +
-      '</style>' + html.value;
+    // Keep conversion content inert and block document-triggered remote image requests.
+    var parsed = new DOMParser().parseFromString(html.value, 'text/html');
+    parsed.querySelectorAll('script,style,link,iframe,object,embed,svg,math,base,meta,form').forEach(function (el) { el.remove(); });
+    parsed.querySelectorAll('*').forEach(function (el) {
+      Array.from(el.attributes).forEach(function (attr) {
+        if (attr.name !== 'src' && attr.name !== 'colspan' && attr.name !== 'rowspan' && attr.name !== 'alt') el.removeAttribute(attr.name);
+      });
+      if (el.hasAttribute('src') && (el.tagName !== 'IMG' || !/^data:image\/(png|jpeg|gif|webp);base64,/i.test(el.getAttribute('src')))) el.removeAttribute('src');
+    });
+    holder.innerHTML = '';
+    holder.style.fontFamily = 'Arial, sans-serif';
+    holder.style.color = '#111';
+    holder.style.lineHeight = '1.55';
+    holder.appendChild(document.importNode(parsed.body, true));
     document.body.appendChild(holder);
 
     // jsPDF is a singleton in the UMD build

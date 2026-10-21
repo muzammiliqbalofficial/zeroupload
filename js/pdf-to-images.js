@@ -4,7 +4,7 @@ var p2i = document.getElementById("fileInput");
 renderP2I = setupDropzone("#fileInput", "#fileList");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "/js/vendor/pdf.worker.min.js";
 
 document.getElementById("dlBtn").addEventListener("click", function () {
   if (p2iState.out) saveBlob(p2iState.out, p2iState.outName);
@@ -34,10 +34,10 @@ async function exportImages() {
   try {
     var pdf;
     try {
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer() }).promise;
     } catch (wErr) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = "";
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer(), disableWorker: true }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer(), disableWorker: true }).promise;
     }
     var total = pdf.numPages;
     var zip = new JSZip();

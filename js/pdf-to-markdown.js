@@ -22,7 +22,7 @@
 
     try {
       var ab = await file.arrayBuffer();
-      var pdf = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
+      var pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: new Uint8Array(ab) }).promise;
       var numPages = pdf.numPages;
 
       var mdSections = [];
@@ -99,19 +99,19 @@
       mdMetaLabel.textContent = numPages + ' Pages ' + extractedMd.split(/\s+/).length + ' words';
       mdRawOutput.textContent = extractedMd;
 
-      // Simple formatted HTML preview
-      var htmlPreview = extractedMd
-        .replace(/^# (.*$)/gim, '<h1></h1>')
-        .replace(/^## (.*$)/gim, '<h2></h2>')
-        .replace(/^### (.*$)/gim, '<h3></h3>')
-        .replace(/^\- (.*$)/gim, '<li></li>')
-        .replace(/\n\n/gim, '<br><br>');
-      mdPreviewOutput.innerHTML = htmlPreview;
+      // Render extracted text as text nodes; document content is untrusted.
+      mdPreviewOutput.replaceChildren();
+      extractedMd.split('\n').forEach(function (line) {
+        var heading = /^(#{1,3})\s+(.*)$/.exec(line);
+        var element = document.createElement(heading ? 'h' + heading[1].length : 'p');
+        element.textContent = heading ? heading[2] : line;
+        mdPreviewOutput.appendChild(element);
+      });
 
       toast('PDF converted to Markdown successfully!');
     } catch (err) {
       progWrap.style.display = 'none';
-      toast('Failed to extract text from PDF: ' + err.message, true);
+      toast(friendlyPdfError(err), true);
     }
   }
 

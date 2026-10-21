@@ -3,7 +3,7 @@ var rmState = { out: null };
 var rmInput = document.getElementById("fileInput");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "/js/vendor/pdf.worker.min.js";
 
 renderRm = setupDropzone("#fileInput", "#fileList", onFileSelected);
 
@@ -20,10 +20,10 @@ async function onFileSelected() {
   try {
     var pdf;
     try {
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer() }).promise;
     } catch (wErr) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = "";
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer(), disableWorker: true }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer(), disableWorker: true }).promise;
     }
     var total = pdf.numPages;
     grid.classList.remove("hide");
@@ -84,10 +84,10 @@ function parseRemove(str, total) {
   String(str).split(",").forEach(function (p) {
     p = p.trim(); if (!p) return;
     var m = p.match(/^(\d+)\s*-\s*(\d+)$/);
-    if (m) { for (var i = +m[1]; i <= +m[2]; i++) set.push(i); }
+    if (m) { for (var i = Math.max(1, +m[1]); i <= Math.min(total, +m[2]); i++) set.push(i); }
     else if (/^\d+$/.test(p)) set.push(+p);
   });
-  return set.filter(function (p) { return p >= 1 && p <= total; });
+  return Array.from(new Set(set.filter(function (p) { return p >= 1 && p <= total; })));
 }
 
 async function removePages() {
@@ -108,7 +108,7 @@ async function removePages() {
 
   try {
     var bytes = new Uint8Array(await file.arrayBuffer());
-    var pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+    var pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: false });
     var total = pdf.getPageCount();
     var toRemove = parseRemove(document.getElementById("removeList").value, total);
     if (!toRemove.length) { toast("Enter or click at least one page to remove", true); return; }

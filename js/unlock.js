@@ -8,7 +8,7 @@ var unlInput = document.getElementById("fileInput");
 setupDropzone("#fileInput", "#fileList");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "/js/vendor/pdf.worker.min.js";
 
 document.getElementById("dlBtn").addEventListener("click", function () {
   if (unlState.out) saveBlob(unlState.out, unlState.outName);
@@ -44,7 +44,7 @@ async function unlockNow() {
     var data = await file.arrayBuffer();
     var pdf;
     try {
-      pdf = await pdfjsLib.getDocument({ data: data.slice(0), password: openPwd || undefined }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: data.slice(0), password: openPwd || undefined }).promise;
     } catch (e1) {
       if (e1.name === "PasswordException") {
         throw new Error("This file requires a password to open. Enter it above.");

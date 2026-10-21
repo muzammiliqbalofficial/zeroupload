@@ -63,7 +63,7 @@ async function mergeNow() {
     for (var j = 0; j < pdfBytesArray.length; j++) {
       var src;
       try {
-        src = await PDFLib.PDFDocument.load(pdfBytesArray[j], { ignoreEncryption: true });
+        src = await PDFLib.PDFDocument.load(pdfBytesArray[j], { ignoreEncryption: false });
       } catch (loadErr) {
         console.error(loadErr);
         throw loadErr; // handled below with a friendly message

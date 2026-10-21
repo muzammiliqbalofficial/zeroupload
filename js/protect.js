@@ -6,7 +6,7 @@ var protInput = document.getElementById("fileInput");
 setupDropzone("#fileInput", "#fileList");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "/js/vendor/pdf.worker.min.js";
 
 document.getElementById("dlBtn").addEventListener("click", function () {
   if (protState.out) saveBlob(protState.out, protState.outName);
@@ -34,10 +34,10 @@ async function protectNow() {
   try {
     var pdf;
     try {
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer() }).promise;
     } catch (wErr) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = "";
-      pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer(), disableWorker: true }).promise;
+      pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer(), disableWorker: true }).promise;
     }
     var total = pdf.numPages;
     var doc = null;

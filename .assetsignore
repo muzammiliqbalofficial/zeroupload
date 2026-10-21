@@ -5,3 +5,17 @@ node_modules/**
 .assetsignore
 wrangler.toml
 README.md
+worker.mjs
+package*.json
+scripts/**
+tests/**
+migrations/**
+content/**
+docs/**
+playwright.config.*
+test-results/**
+artifacts/**
+*.log
+LICENSE
+.gitignore
+!ads.txt

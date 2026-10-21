@@ -54,7 +54,7 @@
   async function loadPdf(file) {
     var ab = await file.arrayBuffer();
     pdfBytes = new Uint8Array(ab);
-    pdfDocProxy = await pdfjsLib.getDocument({ data: pdfBytes.slice(0) }).promise;
+    pdfDocProxy = await pdfjsLib.getDocument({ isEvalSupported: false, data: pdfBytes.slice(0) }).promise;
 
     pagesList = [];
     for (var i = 0; i < pdfDocProxy.numPages; i++) {
@@ -262,7 +262,7 @@
         toast('PDF organized successfully!');
       } catch (err) {
         progWrap.style.display = 'none';
-        toast('Failed to organize PDF: ' + err.message, true);
+        toast(friendlyPdfError(err), true);
       }
     };
   }

@@ -1,0 +1,30 @@
+{
+  "name": "zeroupload",
+  "version": "1.0.0",
+  "description": "Local PDF tools, workflow documentation, and Cloudflare D1 support",
+  "scripts": {
+    "build": "python scripts/build_content.py",
+    "check": "python scripts/verify_content.py",
+    "test": "node --test tests/worker.test.mjs",
+    "dev": "wrangler dev --ip 127.0.0.1 --port 8787",
+    "test:browser": "node scripts/verify_browser.cjs",
+    "deploy:check": "wrangler deploy --dry-run --outdir artifacts/worker-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muzammiliqbalofficial/zeroupload.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/muzammiliqbalofficial/zeroupload/issues"
+  },
+  "homepage": "https://github.com/muzammiliqbalofficial/zeroupload#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "pdf-lib": "^1.17.1",
+    "wrangler": "^4.151.2"
+  }
+}

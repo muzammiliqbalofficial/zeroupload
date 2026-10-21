@@ -190,7 +190,7 @@
         toast('PDF processed successfully!');
       } catch (err) {
         progWrap.style.display = 'none';
-        toast('Failed to process PDF: ' + err.message, true);
+        toast(friendlyPdfError(err), true);
       }
     };
   }

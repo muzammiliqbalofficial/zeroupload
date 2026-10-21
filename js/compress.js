@@ -6,7 +6,7 @@ var compressInput = document.getElementById("fileInput");
 renderCompress = setupDropzone("#fileInput", "#fileList");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "/js/vendor/pdf.worker.min.js";
 
 var LEVELS = {
   low: { scale: 2.0, quality: 0.85 },
@@ -46,17 +46,17 @@ async function compressNow() {
     if (level === "lossless") {
       bar.style.width = "50%"; label.textContent = "Optimizing PDF structure…";
       var bytes = new Uint8Array(await file.arrayBuffer());
-      var srcPdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+      var srcPdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: false });
       totalPages = srcPdf.getPageCount();
       outBytes = await srcPdf.save({ useObjectStreams: true, addDefaultPage: false });
     } else {
       var cfg = LEVELS[level] || LEVELS.medium;
       var pdf;
       try {
-        pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+        pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer() }).promise;
       } catch (wErr) {
         pdfjsLib.GlobalWorkerOptions.workerSrc = "";
-        pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer(), disableWorker: true }).promise;
+        pdf = await pdfjsLib.getDocument({ isEvalSupported: false, data: await file.arrayBuffer(), disableWorker: true }).promise;
       }
       var out = await PDFLib.PDFDocument.create();
       var total = pdf.numPages;

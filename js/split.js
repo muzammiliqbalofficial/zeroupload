@@ -29,12 +29,12 @@ function parseRanges(str, pageCount) {
     var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
     if (m) {
       var a = parseInt(m[1], 10), b = parseInt(m[2], 10);
-      for (var i = a; i <= b; i++) set.push(i);
+      for (var i = Math.max(1, a); i <= Math.min(pageCount, b); i++) set.push(i);
     } else if (/^\d+$/.test(part)) {
       set.push(parseInt(part, 10));
     }
   });
-  return set.filter(function (p) { return p >= 1 && p <= pageCount; });
+  return Array.from(new Set(set.filter(function (p) { return p >= 1 && p <= pageCount; })));
 }
 
 async function splitNow() {
@@ -54,7 +54,7 @@ async function splitNow() {
 
   try {
     var bytes = new Uint8Array(await file.arrayBuffer());
-    var pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+    var pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: false });
     var total = pdf.getPageCount();
     var mode = document.querySelector('input[name="mode"]:checked').value;
     var pageList = [];
@@ -71,7 +71,7 @@ async function splitNow() {
     label.textContent = "Splitting 0/" + pageList.length;
     var parts = await inChunks(pageList, async function (grp, idx) {
       var out = await PDFLib.PDFDocument.create();
-      var src = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+      var src = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: false });
       var inds = grp.map(function (p) { return p - 1; });
       var pages = await out.copyPages(src, inds);
       pages.forEach(function (p) { out.addPage(p); });

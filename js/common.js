@@ -29,6 +29,7 @@ function initTheme() {
       hamb.onclick = function() {
         var open = nav.classList.toggle("open");
         hamb.classList.toggle("active", open);
+        hamb.setAttribute('aria-expanded', String(open));
       };
     }
   }
@@ -71,6 +72,34 @@ function setupDropzone(inputSel, listSel, jsFn) {
         it.querySelector(".f-name").textContent = f.name;
         it.querySelector(".f-meta").textContent = f.type || "PDF Document";
         it.querySelector(".f-size-badge").textContent = fmtBytes(f.size);
+        if (reorderable) {
+          function moveFile(from, to) {
+            if (to < 0 || to >= files.length || from === to) return;
+            var reordered = files.slice();
+            reordered.splice(to, 0, reordered.splice(from, 1)[0]);
+            var transfer = new DataTransfer();
+            reordered.forEach(function (file) { transfer.items.add(file); });
+            input.files = transfer.files;
+            render();
+          }
+          it.addEventListener('dragstart', function (event) { event.dataTransfer.setData('text/plain', String(i)); });
+          it.addEventListener('dragover', function (event) { event.preventDefault(); });
+          it.addEventListener('drop', function (event) {
+            event.preventDefault(); event.stopPropagation();
+            var source = event.dataTransfer.getData('text/plain');
+            if (/^\d+$/.test(source) && Number(source) < files.length) moveFile(Number(source), i);
+          });
+          [-1, 1].forEach(function (direction) {
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn btn-sm';
+            button.textContent = direction < 0 ? '↑' : '↓';
+            button.setAttribute('aria-label', 'Move ' + f.name + (direction < 0 ? ' earlier' : ' later'));
+            button.disabled = i + direction < 0 || i + direction >= files.length;
+            button.onclick = function () { moveFile(i, i + direction); };
+            it.appendChild(button);
+          });
+        }
         it.querySelector(".remove").onclick = function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
@@ -162,7 +191,7 @@ function toolById(id) {
   while (i < ZeroUpload_TOOLS.length) { if (ZeroUpload_TOOLS[i].id === id) return ZeroUpload_TOOLS[i]; i++; }
   return null;
 }
-function toolUrl(id) { return "/tools/" + id + ".html"; }
+function toolUrl(id) { return "/tools/" + id; }
 
 function initRelated() {
   var host = $("#relatedtools");
@@ -227,34 +256,16 @@ function initSearch() {
   });
 }
 
-/* ============================================================================
- * Google AdSense Deferred Initializer (Mobile Speed Optimized)
- * ========================================================================== */
-function initAds() {
-  function loadAdSense() {
-    try {
-      if (!document.querySelector('script[src*="adsbygoogle.js"]')) {
-        var s = document.createElement("script");
-        s.async = true;
-        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8645479142211810";
-        s.crossOrigin = "anonymous";
-        document.head.appendChild(s);
-      }
-      var slots = document.querySelectorAll(".adsbygoogle");
-      if (slots.length > 0 && typeof window.adsbygoogle !== "undefined") {
-        slots.forEach(function () {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        });
-      }
-    } catch (e) {}
-  }
-  if (window.requestIdleCallback) {
-    window.requestIdleCallback(loadAdSense, { timeout: 1500 });
-  } else {
-    setTimeout(loadAdSense, 800);
-  }
+/* AdSense loads from the static head; Google Privacy & Messaging manages consent. */
+function initPrivacyChoices() {
+  var choices = document.getElementById('privacyChoices');
+  if (choices) choices.onclick = function () {
+    if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') window.googlefc.showRevocationMessage();
+    else document.getElementById('privacyChoiceStatus').textContent = 'Use Google Ads Settings or the advertising opt-out links below, or contact us for additional choices.';
+  };
 }
-
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPrivacyChoices);
+else initPrivacyChoices();
 /* ---------------------------------------------------------------------------
  * Generic helpers
  * ------------------------------------------------------------------------ */
@@ -268,7 +279,10 @@ function toast(msg, isErr) {
   var icon = isErr
     ? '<svg class="icon icon-sm" style="color:var(--danger)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
     : '<svg class="icon icon-sm" style="color:var(--success)" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
-  t.innerHTML = icon + '<span>' + msg + '</span>';
+  t.innerHTML = icon;
+  var message = document.createElement('span');
+  message.textContent = String(msg);
+  t.appendChild(message);
   t.classList.add("show");
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(function () { t.classList.remove("show"); }, 3500);
@@ -343,10 +357,9 @@ async function inChunks(items, workerFn, onProgress) {
 /* Turns a thrown error into a short, non-technical message for the toast. */
 function friendlyPdfError(err) {
   var msg = (err && err.message) || String(err || "");
-  if (/password|encrypted/i.test(msg)) return "This PDF needs a password — enter it above and try again.";
+  if (/password|encrypted/i.test(msg)) return "This PDF is encrypted. Use an authorized unencrypted export, or enter the password in Unlock PDF.";
   if (/no pages/i.test(msg)) return "That file has no pages to work with.";
   if (/invalid pdf|structure|corrupt/i.test(msg)) return "That file doesn't look like a valid PDF. Try a different file.";
-  if (msg && msg.length < 120) return msg;
   return "Something went wrong processing that file. Try a different file or reload the page.";
 }
 
@@ -375,10 +388,8 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", function() {
     initRelated();
     initSearch();
-    initAds();
   });
 } else {
   initRelated();
   initSearch();
-  initAds();
 }

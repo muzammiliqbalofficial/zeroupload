@@ -14,6 +14,23 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+.documentation { max-width: 920px; margin: 28px auto; padding: clamp(20px, 4vw, 44px); line-height: 1.8; overflow-wrap: anywhere; }
+.documentation h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.2; margin-bottom: 24px; }
+.documentation h2 { font-size: 1.4rem; margin: 32px 0 12px; line-height: 1.35; }
+.documentation h3 { font-size: 1.1rem; margin: 24px 0 8px; line-height: 1.4; }
+.documentation p, .documentation ul { margin-bottom: 18px; }
+.documentation ul { padding-left: 24px; }
+.documentation a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.documentation .table-wrap { overflow-x: auto; margin: 24px 0; }
+.documentation table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+.documentation th, .documentation td { border: 1px solid var(--border); padding: 12px; text-align: left; vertical-align: top; }
+.documentation caption { text-align: left; font-weight: 600; margin-bottom: 10px; }
+.documentation th { background: var(--hover); }
+.guide-grid { display: grid; gap: 24px; }
+.guide-grid section { border-bottom: 1px solid var(--border); padding-bottom: 18px; }
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+#formStatus { margin-top: 20px; line-height: 1.7; }
+
 :root {
   --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -66,9 +83,9 @@ html[data-theme="dark"] {
   --muted: #94a3b8;
   --border: rgba(255, 255, 255, 0.08);
   --border-focus: #818cf8;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-glow: rgba(99, 102, 241, 0.25);
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-glow: rgba(129, 140, 248, 0.25);
   --accent: #22d3ee;
   --success: #34d399;
   --danger: #f87171;
@@ -557,8 +574,9 @@ footer a { display: block; color: #94a3b8; font-size: 0.86rem; margin: 7px 0; tr
 footer a:hover { color: #ffffff; text-decoration: none; }
 footer .legal {
   max-width: 1180px; margin: 32px auto 0; padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; text-align: center; color: #64748b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; text-align: center; color: #94a3b8;
 }
+footer .legal a { display: inline; color: #cbd5e1; text-decoration: underline; }
 
 /* Toast Notification */
 #toast {

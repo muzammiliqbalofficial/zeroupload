@@ -207,7 +207,7 @@
   async function loadPdf(file) {
     var ab = await file.arrayBuffer();
     pdfBytes = new Uint8Array(ab);
-    pdfDocProxy = await pdfjsLib.getDocument({ data: pdfBytes.slice(0) }).promise;
+    pdfDocProxy = await pdfjsLib.getDocument({ isEvalSupported: false, data: pdfBytes.slice(0) }).promise;
 
     pageSelect.innerHTML = '';
     for (var i = 1; i <= pdfDocProxy.numPages; i++) {
@@ -337,7 +337,7 @@
         toast('Document signed successfully!');
       } catch (err) {
         progWrap.style.display = 'none';
-        toast('Failed to sign document: ' + err.message, true);
+        toast(friendlyPdfError(err), true);
       }
     };
   }

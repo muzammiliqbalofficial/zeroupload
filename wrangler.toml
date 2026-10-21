@@ -1,0 +1,31 @@
+name = "zeroupload"
+main = "worker.mjs"
+compatibility_date = "2026-09-02"
+workers_dev = true
+
+routes = [
+  { pattern = "zeroupload.co", custom_domain = true },
+  { pattern = "www.zeroupload.co", custom_domain = true },
+]
+
+[assets]
+directory = "."
+binding = "ASSETS"
+html_handling = "drop-trailing-slash"
+not_found_handling = "404-page"
+run_worker_first = true
+
+[[d1_databases]]
+binding = "SUPPORT_DB"
+database_name = "zeroupload-support"
+database_id = "c836b0ef-ecb8-4c1a-bfed-691af2fa52e9"
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["15 3 * * *"]
+
+[observability]
+enabled = true
+
+[observability.traces]
+enabled = true

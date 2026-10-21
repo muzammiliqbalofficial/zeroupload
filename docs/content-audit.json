@@ -1,0 +1,114 @@
+[
+  {
+    "route": "/guides/best-practices-for-secure-pdf-sharing",
+    "words": 1130
+  },
+  {
+    "route": "/guides/choose-pdf-image-resolution",
+    "words": 1086
+  },
+  {
+    "route": "/guides/client-side-pdf-security-guide",
+    "words": 1070
+  },
+  {
+    "route": "/guides/convert-pdf-to-markdown-for-chatgpt-ai",
+    "words": 1125
+  },
+  {
+    "route": "/guides/how-to-combine-pdf-files",
+    "words": 1129
+  },
+  {
+    "route": "/guides/how-to-compress-pdf-without-losing-quality",
+    "words": 1086
+  },
+  {
+    "route": "/guides/how-to-convert-pdf-to-word-without-formatting-loss",
+    "words": 1102
+  },
+  {
+    "route": "/guides/how-to-organize-and-reorder-pdf-pages",
+    "words": 1082
+  },
+  {
+    "route": "/guides/how-to-protect-pdf-with-password",
+    "words": 1127
+  },
+  {
+    "route": "/guides/how-to-sign-pdf-electronically",
+    "words": 1116
+  },
+  {
+    "route": "/guides/remove-sensitive-pages-before-sharing",
+    "words": 1118
+  },
+  {
+    "route": "/guides/troubleshoot-corrupt-pdf-xref-tables",
+    "words": 1119
+  },
+  {
+    "route": "/guides/understanding-client-side-file-privacy",
+    "words": 1104
+  },
+  {
+    "route": "/tools/compress",
+    "words": 699
+  },
+  {
+    "route": "/tools/images-to-pdf",
+    "words": 703
+  },
+  {
+    "route": "/tools/merge",
+    "words": 708
+  },
+  {
+    "route": "/tools/organize",
+    "words": 694
+  },
+  {
+    "route": "/tools/page-numbers",
+    "words": 689
+  },
+  {
+    "route": "/tools/pdf-to-images",
+    "words": 700
+  },
+  {
+    "route": "/tools/pdf-to-markdown",
+    "words": 703
+  },
+  {
+    "route": "/tools/pdf-to-word",
+    "words": 698
+  },
+  {
+    "route": "/tools/protect",
+    "words": 695
+  },
+  {
+    "route": "/tools/remove-pages",
+    "words": 700
+  },
+  {
+    "route": "/tools/rotate",
+    "words": 687
+  },
+  {
+    "route": "/tools/sign",
+    "words": 739
+  },
+  {
+    "route": "/tools/split",
+    "words": 712
+  },
+  {
+    "route": "/tools/unlock",
+    "words": 708
+  },
+  {
+    "route": "/tools/word-to-pdf",
+    "words": 701
+  }
+]
